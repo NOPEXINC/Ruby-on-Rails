@@ -13,25 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20150404091209) do
 
-  create_table "admin_users", force: :cascade do |t|
-    t.string   "first_name",      limit: 50
-    t.string   "last_name",       limit: 75
-    t.string   "email",           limit: 100, default: "", null: false
-    t.string   "hashed_password", limit: 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "username",        limit: 25
-  end
-
-  add_index "admin_users", ["username"], name: "index_admin_users_on_username"
-
   create_table "admin_users_pages", id: false, force: :cascade do |t|
     t.integer "admin_user_id"
     t.integer "page_id"
   end
 
-  add_index "admin_users_pages", ["admin_user_id"], name: "index_admin_users_pages_on_admin_user_id"
-  add_index "admin_users_pages", ["page_id"], name: "index_admin_users_pages_on_page_id"
+  add_index "admin_users_pages", ["admin_user_id", "page_id"], name: "index_admin_users_pages_on_admin_user_id_and_page_id"
 
   create_table "pages", force: :cascade do |t|
     t.integer  "subject_id"
@@ -74,6 +61,15 @@ ActiveRecord::Schema.define(version: 20150404091209) do
     t.string   "name",       limit: 30
     t.integer  "position"
     t.boolean  "visible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name", limit: 50
+    t.string   "last_name",  limit: 75
+    t.string   "email",                 default: "", null: false
+    t.string   "password",   limit: 40
     t.datetime "created_at"
     t.datetime "updated_at"
   end
