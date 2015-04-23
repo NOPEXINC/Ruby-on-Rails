@@ -4,7 +4,7 @@ class SubjectsController < ApplicationController
    @subjects = Subject.order("position ASC")
    
   end
-
+  #this is my app
   def show
     @subject = Subject.find(params[:id])
   end
